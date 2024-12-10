@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hmmm</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        height: 100vh;
+        background-color: black;
+        background: #0c1d2a;
+        background: linear-gradient(135deg, #0c1d2a, #1b7adc);
+        padding: 0;
+        margin: 0;
+        color: white;
+        font-family: "Architects Daughter", cursive;
+        font-weight: 400;
+        font-style: normal;
+      }
+
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden; /* Prevent scrollbars from appearing */
+      }
+
+      img {
+        padding: 0;
+      }
+
+      .avatar {
+        position: relative;
+        animation-name: slide-in;
+        animation-duration: 3s;
+        animation-fill-mode: forwards;
+      }
+
+      @keyframes slide-in {
+        0% {
+          transform: translateX(-100%);
+        }
+        100% {
+          transform: translateX(0);
+        }
+      }
+      @keyframes pop {
+        0% {
+          transform: translateY(150%);
+        }
+        100% {
+          transform: translateX(0);
+        }
+      }
+
+      .box p {
+        display: inline-block;
+        color: rgb(10, 94, 176);
+        color: white;
+        margin: 0;
+        padding: 20px;
+        line-height: 1.5;
+      }
+
+      .box {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        position: absolute;
+        top: 24%;
+        left: 20%;
+        width: 300px;
+        background-color: rgb(255, 126, 226);
+        opacity: 0; /* Initially hidden */
+        transition: opacity 0.5s ease-in-out; /* Smooth fade-in */
+        padding-bottom: 10px;
+        margin: 0;
+      }
+
+      .box button {
+        margin-left: 20px;
+      }
+
+      .right-top:before {
+        right: auto;
+        bottom: auto;
+        content: " ";
+        position: absolute;
+        width: 0;
+        height: 0;
+        left: -20px;
+        right: auto;
+        top: 0px;
+        bottom: auto;
+        border: 22px solid;
+        border-color: rgb(255, 126, 226) transparent transparent transparent;
+      }
+
+      .start {
+        margin: 0;
+        padding: 5px 10px;
+        border: none;
+      }
+
+      .start,
+      .start p {
+        font-family: "Architects Daughter", cursive;
+        font-weight: 400;
+        font-style: normal;
+      }
+
+      .balloon {
+        visibility: hidden;
+      }
+
+      .msg {
+        visibility: hidden;
+      }
+
+      .hidden {
+        visibility: visible;
+        position: absolute;
+        top: 10%;
+        left: 60%;
+        animation-name: pop;
+        animation-duration: 3s;
+        animation-fill-mode: forwards;
+      }
+
+      .letter {
+        visibility: visible;
+        position: absolute;
+        top: 35%;
+        left: 64%;
+        animation-name: pop;
+        animation-duration: 3s;
+        animation-fill-mode: forwards;
+      }
+
+      .start {
+        border: none;
+        background: none;
+        color: white;
+        cursor: pointer;
+        font-size: 1.3em;
+        border: 3px solid;
+        border-radius: 1em;
+        position: relative;
+        font-family: "izayoi";
+        animation: colorChange 0.75s infinite;
+        animation-direction: alternate;
+        background: linear-gradient(45deg, #ff6ec4, #7873f5, #5744ff, #13f1fc);
+        background-size: 300%;
+        animation: twinkleColors 3s linear infinite;
+        margin-bottom: 10px;
+      }
+
+      @keyframes twinkleColors {
+        0% {
+          background-position: 0% 50%;
+        }
+        25% {
+          background-position: 25% 75%;
+        }
+        50% {
+          background-position: 50% 25%;
+        }
+        75% {
+          background-position: 75% 50%;
+        }
+        100% {
+          background-position: 100% 50%;
+        }
+      }
+
+      .model {
+        display: inline-flex;
+        flex-direction: column;
+        transform: translate(-50%, -50%);
+        gap: 10px;
+        background-color: white;
+        padding: 20px 20px 20px 40px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        display: none;
+        z-index: 10;
+        color: black;
+        width: 500px;
+      }
+
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: none;
+        z-index: 5;
+      }
+
+      .content {
+        width: 250px;
+        text-align: left;
+      }
+
+      .boo {
+        display: inline-flex;
+      }
+
+      .overlay.active {
+        display: block;
+      }
+
+      .start {
+        font-family: "Architects Daughter", cursive;
+        font-weight: 400;
+        border: none;
+      }
+
+      .next {
+        border: 1px solid white;
+      }
+
+      .next a {
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div id="avatar">
+        <img class="avatar" src="jinx.png" style="width: 250px" />
+      </div>
+      <audio src="hi.mp3" class="hi"></audio>
+      <div id="messageBox" class="box right-top">
+        <p>
+          Turning 24 huh? It’s official, you’re a 24-year-old icon, talented,
+          cool, and always showing us how it’s done! but oh well well well lemme
+          stop my rambling here and
+          <span style="color: black">Aarambikkalaama?</span>
+        </p>
+        <button class="start" id="start">Yep!</button>
+      </div>
+    </div>
+    <div>
+      <img class="balloon" src="balloon.png" style="width: 180px" />
+      <div class="show">
+        <img class="msg" src="love-letter.png" style="width: 80px" />
+      </div>
+    </div>
+    <div class="overlay"></div>
+    <div class="model start">
+      <audio id="audio" src="bridge.mp3"></audio>
+      <p>
+        I LOVE YOU AKKA! you are my favourite human on the earth. i remember
+        doing and saying some terrible things to you when i was a kid, i didnt
+        forgot any of that cuz sometimes my mind trailing back to those moments
+        and i feel guilty & sorry for that, forgive the past me. I wish everyone
+        on the earth were you hehe. I admire you lots and lots yk, i suck at
+        writting stuffs... HAPPIEST BIRTHDAY MA"AM KEEP SLAYING! IM YOUR NO 1
+        FAN BTW im not letting anyone grab my position 🙄.
+      </p>
+      <button class="start next"><a href="cake.html">Next Povom</a></button>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const audio = document.getElementById("audio");
+        const startBtn = document.querySelector(".start");
+        const img = document.querySelector(".balloon");
+        const msg = document.querySelector(".msg");
+        const avatar = document.querySelector(".avatar");
+        const hi = document.querySelector(".hi");
+        // const audio = document.getElementById("audio");
+        const messageBox = document.querySelector("#messageBox");
+        const revealMsg = document.querySelector(".show");
+        const overlay = document.querySelector(".overlay");
+        const modal = document.querySelector(".model");
+        function show() {
+          audio.loop = true; // Enable looping
+          audio.play(); // Start playing the audio
+          img.classList.add("hidden");
+          msg.classList.add("letter");
+        }
+
+        // Listen for when the avatar animation ends
+        avatar.addEventListener("animationend", () => {
+          // Show the box with a fade-in effect
+          messageBox.style.opacity = 1;
+        });
+
+        function openModal() {
+          modal.classList.add("boo");
+          overlay.classList.add("active");
+        }
+
+        function closeModal() {
+          modal.classList.remove("boo");
+          overlay.classList.remove("active");
+        }
+
+        revealMsg.addEventListener("click", openModal);
+        overlay.addEventListener("click", closeModal);
+
+        document.addEventListener("keydown", function (e) {
+          console.log(e.key);
+          if (e.key === "Escape" && modal.classList.contains("boo")) {
+            closeModal();
+          }
+        });
+
+        startBtn.addEventListener("click", show);
+      });
+    </script>
+  </body>
+</html>
